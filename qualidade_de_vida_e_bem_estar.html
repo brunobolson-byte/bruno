@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equilíbrio Vital — Qualidade de Vida e Bem-Estar</title>
+    <!-- Carregando Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonte Google Fonts: Inter e Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Ícones Lucide via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        sage: {
+                            50: '#f4f9f6',
+                            100: '#e3f1e8',
+                            200: '#c7e3d2',
+                            500: '#499f68',
+                            600: '#368052',
+                            700: '#2b6642',
+                        },
+                        serenity: {
+                            50: '#f0f7fa',
+                            100: '#dceef5',
+                            500: '#3b8ea5',
+                            600: '#2d7286',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-700 font-sans antialiased selection:bg-sage-200 selection:text-sage-700">
+
+    <!-- Notificação Flutuante (Substitui o alert) -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-800 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700">
+            <i data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i>
+            <span id="toast-message" class="text-sm font-medium">Ação realizada com sucesso!</span>
+        </div>
+    </div>
+
+    <!-- Barra de Navegação -->
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                        <i data-lucide="leaf" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl text-slate-800 tracking-tight">Equilíbrio<span class="text-emerald-600">Vital</span></span>
+                </a>
+                
+                <!-- Links Desktop -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                    <a href="#pilares" class="hover:text-emerald-600 transition-colors">Os 5 Pilares</a>
+                    <a href="#termometro" class="hover:text-emerald-600 transition-colors">Termômetro de Hábitos</a>
+                    <a href="#ferramentas" class="hover:text-emerald-600 transition-colors">Desafio & Hidratação</a>
+                </div>
+
+                <a href="#termometro" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm hover:shadow active:scale-95">
+                    Avaliar Meus Hábitos
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Cabeçalho Informativo (Hero Section) -->
+    <header class="relative overflow-hidden bg-gradient-to-b from-sage-50 via-serenity-50/50 to-slate-50 pt-12 pb-20 sm:pt-20 sm:pb-28">
+        <!-- Elementos decorativos suaves -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl pointer-events-none overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-200/30 rounded-full blur-3xl"></div>
+            <div class="absolute top-32 -left-24 w-80 h-80 bg-sky-200/30 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-emerald-200/80 shadow-sm text-emerald-700 text-xs sm:text-sm font-medium mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Cuidar de você é o melhor investimento diário
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6">
+                Construa uma rotina mais <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-sky-600">leve, saudável e equilibrada</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed mb-10">
+                A verdadeira qualidade de vida nasce da harmonia entre corpo e mente. Explore os cinco pilares fundamentais do bem-estar, descubra dicas práticas e avalie seus hábitos diários em tempo real.
+            </p>
+
+            <!-- Resumo rápido dos 5 pilares no cabeçalho -->
+            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10">
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 border border-slate-200/80 text-sm font-medium text-slate-700 shadow-sm">
+                    <i data-lucide="heart-pulse" class="w-4 h-4 text-rose-500"></i> Saúde Física
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 border border-slate-200/80 text-sm font-medium text-slate-700 shadow-sm">
+                    <i data-lucide="brain" class="w-4 h-4 text-indigo-500"></i> Saúde Mental
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 border border-slate-200/80 text-sm font-medium text-slate-700 shadow-sm">
+                    <i data-lucide="apple" class="w-4 h-4 text-emerald-500"></i> Alimentação
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 border border-slate-200/80 text-sm font-medium text-slate-700 shadow-sm">
+                    <i data-lucide="moon" class="w-4 h-4 text-sky-500"></i> Sono Reparador
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/90 border border-slate-200/80 text-sm font-medium text-slate-700 shadow-sm">
+                    <i data-lucide="users" class="w-4 h-4 text-amber-500"></i> Relacionamentos
+                </span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pilares" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                    Explorar os Pilares
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+                <a href="#termometro" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold transition-all shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="activity" class="w-4 h-4"></i>
+                    Fazer Teste Rápido
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
+
+        <!-- 2. Cards Interativos com Dicas Práticas para cada Pilar -->
+        <section id="pilares" class="scroll-mt-24">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-emerald-600 font-semibold text-sm uppercase tracking-wider">Fundamentos do Bem-Estar</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-800 mt-2 mb-4">Os 5 Pilares da Qualidade de Vida</h2>
+                <p class="text-slate-600">Clique em qualquer cartão abaixo para revelar hábitos simples e práticas aplicáveis hoje mesmo na sua rotina.</p>
+            </div>
+
+            <!-- Grid Responsivo dos Cards -->
+            <div id="pillars-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Os cards serão renderizados dinamicamente via JavaScript para permitir interatividade limpa -->
+            </div>
+        </section>
+
+        <!-- 3. Termômetro de Qualidade de Vida Interativo -->
+        <section id="termometro" class="scroll-mt-24">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden">
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-8 sm:px-10 text-white">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-medium mb-3">
+                                <i data-lucide="gauge" class="w-4 h-4"></i> Diagnóstico Instantâneo
+                            </div>
+                            <h2 class="font-display text-2xl sm:text-3xl font-bold">Termômetro de Qualidade de Vida</h2>
+                            <p class="text-emerald-50 mt-1 text-sm sm:text-base max-w-xl">
+                                Ajuste os indicadores abaixo de acordo com a sua rotina atual e veja sua pontuação e recomendações personalizadas em tempo real.
+                            </p>
+                        </div>
+                        <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 text-center min-w-[140px] border border-white/20">
+                            <span class="block text-xs uppercase tracking-wider text-emerald-100">Sua Pontuação</span>
+                            <div class="font-display text-4xl font-extrabold mt-1">
+                                <span id="score-value">65</span><span class="text-lg font-normal text-emerald-100">/100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <!-- Controles / Perguntas do Quiz -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- Item 1: Horas de Sono -->
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                            <div class="flex justify-between items-center mb-3">
+                                <label for="input-sleep" class="font-semibold text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="moon" class="w-5 h-5 text-sky-600"></i>
+                                    Horas de sono por noite
+                                </label>
+                                <span id="label-sleep" class="px-3 py-1 rounded-lg bg-sky-100 text-sky-800 font-bold text-sm">7 horas</span>
+                            </div>
+                            <input type="range" id="input-sleep" min="4" max="11" value="7" step="0.5" 
+                                class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                            <div class="flex justify-between text-xs text-slate-400 mt-2">
+                                <span>4h (Insuficiente)</span>
+                                <span>7h - 9h (Ideal)</span>
+                                <span>11h (Excessivo)</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Hidratação -->
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                            <div class="flex justify-between items-center mb-3">
+                                <label for="input-water" class="font-semibold text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="droplets" class="w-5 h-5 text-blue-500"></i>
+                                    Consumo diário de água
+                                </label>
+                                <span id="label-water" class="px-3 py-1 rounded-lg bg-blue-100 text-blue-800 font-bold text-sm">6 copos (1.5L)</span>
+                            </div>
+                            <input type="range" id="input-water" min="1" max="12" value="6" step="1" 
+                                class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                            <div class="flex justify-between text-xs text-slate-400 mt-2">
+                                <span>1 copo</span>
+                                <span>8+ copos (2L - Ideal)</span>
+                                <span>12 copos</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Atividade Física -->
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                            <label class="font-semibold text-slate-800 flex items-center gap-2 mb-3">
+                                <i data-lucide="dumbbell" class="w-5 h-5 text-emerald-600"></i>
+                                Frequência de atividade física na semana
+                            </label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="activity-options">
+                                <button type="button" data-points="5" class="habit-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center">
+                                    Sedentário
+                                </button>
+                                <button type="button" data-points="15" class="habit-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center">
+                                    1 a 2 dias
+                                </button>
+                                <button type="button" data-points="25" class="habit-btn active-habit p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-sm font-semibold text-emerald-800 transition-all text-center">
+                                    3 a 4 dias
+                                </button>
+                                <button type="button" data-points="25" class="habit-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center">
+                                    5+ dias
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Pausas Mentais e Lazer -->
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                            <label class="font-semibold text-slate-800 flex items-center gap-2 mb-3">
+                                <i data-lucide="coffee" class="w-5 h-5 text-amber-600"></i>
+                                Pausas mentais e desconexão de telas
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="breaks-options">
+                                <button type="button" data-points="5" class="break-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center">
+                                    Quase nunca paro
+                                </button>
+                                <button type="button" data-points="15" class="break-btn active-break p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-sm font-semibold text-emerald-800 transition-all text-center">
+                                    Algumas pausas breves
+                                </button>
+                                <button type="button" data-points="25" class="break-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center">
+                                    Faço pausas regulares
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Painel de Resultado e Feedback em Tempo Real -->
+                    <div class="lg:col-span-5 bg-gradient-to-b from-slate-50 to-sage-50/70 rounded-2xl p-6 sm:p-7 border border-slate-200/90 sticky top-24">
+                        <h3 class="font-display font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="clipboard-check" class="w-5 h-5 text-emerald-600"></i>
+                            Análise do Seu Equilíbrio
+                        </h3>
+
+                        <!-- Barra Visual do Termômetro -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-semibold mb-1.5">
+                                <span id="status-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Bom Equilíbrio</span>
+                                <span id="percentage-text" class="text-slate-600">65%</span>
+                            </div>
+                            <div class="w-full h-4 bg-slate-200 rounded-full overflow-hidden p-0.5">
+                                <div id="thermometer-bar" class="h-full rounded-full bg-gradient-to-r from-amber-400 via-emerald-500 to-teal-500 transition-all duration-500" style="width: 65%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Mensagem Dinâmica -->
+                        <div id="feedback-box" class="p-4 rounded-xl bg-white border border-slate-200/80 mb-5 shadow-sm">
+                            <p id="feedback-title" class="font-bold text-slate-800 text-base mb-1">Você está no caminho certo!</p>
+                            <p id="feedback-desc" class="text-sm text-slate-600 leading-relaxed">
+                                Seus hábitos mostram uma boa base de autocuidado, mas pequenos ajustes podem elevar ainda mais sua energia diária.
+                            </p>
+                        </div>
+
+                        <!-- Sugestões Personalizadas -->
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Sugestões prioritárias para você:</h4>
+                            <ul id="suggestions-list" class="space-y-2.5 text-sm text-slate-700">
+                                <!-- Preenchido via JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Gerador de Desafio Diário & Contador de Hidratação -->
+        <section id="ferramentas" class="scroll-mt-24">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-sky-600 font-semibold text-sm uppercase tracking-wider">Ação Imediata</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-800 mt-2 mb-3">Pequenos Passos, Grandes Mudanças</h2>
+                <p class="text-slate-600">Use estas ferramentas interativas ao longo do dia para manter o foco no seu autocuidado.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Gerador de Desafio Diário de Bem-Estar -->
+                <div class="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-100/40 rounded-full -mr-16 -mt-16 pointer-events-none"></div>
+                    
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 font-semibold text-xs">
+                                <i data-lucide="sparkles" class="w-4 h-4"></i> Desafio de Hoje
+                            </span>
+                            <span id="challenge-category" class="text-xs font-medium text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+                                Saúde Mental
+                            </span>
+                        </div>
+
+                        <div class="min-h-[140px] flex flex-col justify-center my-2">
+                            <h3 id="challenge-title" class="font-display text-2xl font-bold text-slate-800 mb-3 transition-opacity duration-300">
+                                Respiração Consciente 4-7-8
+                            </h3>
+                            <p id="challenge-desc" class="text-slate-600 leading-relaxed text-sm sm:text-base transition-opacity duration-300">
+                                Faça uma pausa de 2 minutos agora: inspire pelo nariz por 4 segundos, segure o ar por 7 segundos e expire lentamente pela boca por 8 segundos. Repita 3 vezes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3 mt-4">
+                        <button id="btn-new-challenge" type="button" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-5 rounded-2xl transition-all shadow-sm hover:shadow flex items-center justify-center gap-2 active:scale-95">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            Sortear Novo Desafio
+                        </button>
+                        <button id="btn-complete-challenge" type="button" class="sm:w-auto bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 border border-slate-200 hover:border-emerald-300 font-semibold py-3.5 px-5 rounded-2xl transition-all flex items-center justify-center gap-2 active:scale-95">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            Concluir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Contador de Hidratação (Copos de Água) -->
+                <div class="bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-sky-100/50 rounded-full -mr-16 -mt-16 pointer-events-none"></div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-sky-50 text-sky-700 font-semibold text-xs">
+                                <i data-lucide="droplet" class="w-4 h-4"></i> Meta Diária: 8 Copos (2L)
+                            </span>
+                            <button id="btn-reset-water" type="button" class="text-xs text-slate-400 hover:text-rose-500 transition-colors flex items-center gap-1 p-1">
+                                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Zerar
+                            </button>
+                        </div>
+
+                        <div class="flex items-baseline justify-between mb-4">
+                            <div>
+                                <h3 class="font-display text-2xl font-bold text-slate-800">Hidratação Diária</h3>
+                                <p class="text-sm text-slate-500 mt-0.5">Cada copo equivale a aproximadamente 250ml</p>
+                            </div>
+                            <div class="text-right">
+                                <span id="water-count-display" class="font-display text-3xl font-extrabold text-sky-600">0</span>
+                                <span class="text-slate-400 font-medium text-sm">/ 8 copos</span>
+                                <span id="water-ml-display" class="block text-xs text-sky-600/80 font-medium">0 ml</span>
+                            </div>
+                        </div>
+
+                        <!-- Grade Visual de Copos Clicáveis -->
+                        <div id="water-cups-grid" class="grid grid-cols-4 sm:grid-cols-8 gap-2.5 my-6">
+                            <!-- Copos gerados via JS -->
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between gap-4">
+                        <p id="water-motivation" class="text-xs sm:text-sm text-slate-600 font-medium">
+                            Comece o dia bebendo um copo de água para despertar o metabolismo!
+                        </p>
+                        <button id="btn-add-water" type="button" class="shrink-0 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-5 rounded-2xl transition-all shadow-sm hover:shadow flex items-center gap-2 active:scale-95">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            Beber 1 Copo
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white border-t border-slate-200/80 py-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+            <div class="flex items-center gap-2">
+                <i data-lucide="leaf" class="w-4 h-4 text-emerald-600"></i>
+                <span class="font-semibold text-slate-700">Equilíbrio Vital</span> — Portal Interativo de Bem-Estar
+            </div>
+            <p class="text-center sm:text-right text-xs text-slate-400">
+                Nota: As informações desta página têm caráter educativo e não substituem orientação médica ou nutricional profissional.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript Completa -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa os ícones Lucide
+            lucide.createIcons();
+
+            // ==========================================
+            // 0. SISTEMA DE NOTIFICAÇÃO (TOAST)
+            // ==========================================
+            let toastTimeout;
+            function showToast(message) {
+                const toast = document.getElementById('toast-notification');
+                const toastMsg = document.getElementById('toast-message');
+                toastMsg.textContent = message;
+                
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 3200);
+            }
+
+            // ==========================================
+            // 1. CARDS INTERATIVOS DOS 5 PILARES
+            // ==========================================
+            const pillarsData = [
+                {
+                    id: 'fisica',
+                    title: 'Saúde Física',
+                    subtitle: 'Movimento e vitalidade corporal',
+                    icon: 'heart-pulse',
+                    colorBg: 'bg-rose-50',
+                    colorText: 'text-rose-600',
+                    borderHover: 'hover:border-rose-300',
+                    summary: 'Manter o corpo ativo fortalece o coração, melhora a imunidade e libera endorfinas que combatem o estresse.',
+                    tips: [
+                        'Faça caminhadas de 30 minutos ao ar livre pelo menos 3 vezes na semana.',
+                        'Alongue pescoço, ombros e coluna a cada 2 horas de trabalho sentado.',
+                        'Prefira escadas ao elevador em trajetos curtos do dia a dia.'
+                    ]
+                },
+                {
+                    id: 'mental',
+                    title: 'Saúde Mental',
+                    subtitle: 'Equilíbrio emocional e foco',
+                    icon: 'brain',
+                    colorBg: 'bg-indigo-50',
+                    colorText: 'text-indigo-600',
+                    borderHover: 'hover:border-indigo-300',
+                    summary: 'Gerenciar emoções e desacelerar a mente previne a exaustão e aumenta a clareza para tomar decisões.',
+                    tips: [
+                        'Pratique 5 minutos de respiração profunda ou meditação ao acordar.',
+                        'Estabeleça limites claros entre o horário de trabalho e o descanso.',
+                        'Reduza o excesso de notificações e redes sociais antes de dormir.'
+                    ]
+                },
+                {
+                    id: 'alimentacao',
+                    title: 'Alimentação Consciente',
+                    subtitle: 'Nutrição que gera energia',
+                    icon: 'apple',
+                    colorBg: 'bg-emerald-50',
+                    colorText: 'text-emerald-600',
+                    borderHover: 'hover:border-emerald-300',
+                    summary: 'Comer bem não significa restrição extrema, mas sim priorizar alimentos naturais, coloridos e nutritivos.',
+                    tips: [
+                        'Inclua pelo menos 3 cores diferentes de vegetais ou frutas nas refeições.',
+                        'Mastigue devagar e evite comer distraído em frente a telas.',
+                        'Mantenha uma garrafa de água sempre visível na sua mesa.'
+                    ]
+                },
+                {
+                    id: 'sono',
+                    title: 'Sono Reparador',
+                    subtitle: 'Recuperação física e cognitiva',
+                    icon: 'moon',
+                    colorBg: 'bg-sky-50',
+                    colorText: 'text-sky-600',
+                    borderHover: 'hover:border-sky-300',
+                    summary: 'É durante o sono profundo que o cérebro consolida memórias e o organismo regenera tecidos e hormônios.',
+                    tips: [
+                        'Mantenha horários regulares para dormir e acordar, inclusive nos fins de semana.',
+                        'Evite cafeína e refeições muito pesadas até 4 horas antes de deitar.',
+                        'Deixe o quarto escuro, silencioso e com temperatura agradável.'
+                    ]
+                },
+                {
+                    id: 'relacionamentos',
+                    title: 'Relacionamentos Saudáveis',
+                    subtitle: 'Conexão humana e pertencimento',
+                    icon: 'users',
+                    colorBg: 'bg-amber-50',
+                    colorText: 'text-amber-600',
+                    borderHover: 'hover:border-amber-300',
+                    summary: 'Vínculos afetivos genuínos com família, amigos e comunidade são um dos maiores fatores de longevidade.',
+                    tips: [
+                        'Envie uma mensagem sincera para um amigo ou familiar hoje.',
+                        'Pratique a escuta ativa sem interromper quando alguém estiver falando.',
+                        'Reserve tempo de qualidade presencial com pessoas que te fazem bem.'
+                    ]
+                }
+            ];
+
+            const pillarsGrid = document.getElementById('pillars-grid');
+
+            pillarsData.forEach((pillar) => {
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm transition-all duration-300 cursor-pointer select-none ${pillar.borderHover} hover:shadow-md flex flex-col justify-between`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-2xl ${pillar.colorBg} ${pillar.colorText} flex items-center justify-center shrink-0">
+                                <i data-lucide="${pillar.icon}" class="w-6 h-6"></i>
+                            </div>
+                            <span class="toggle-indicator inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600 transition-colors">
+                                <span>Ver dicas</span>
+                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-slate-800">${pillar.title}</h3>
+                        <p class="text-xs font-medium ${pillar.colorText} mb-3">${pillar.subtitle}</p>
+                        <p class="text-sm text-slate-600 leading-relaxed">${pillar.summary}</p>
+                    </div>
+
+                    <!-- Área Expansível com Dicas Práticas -->
+                    <div class="tips-drawer hidden mt-5 pt-5 border-t border-slate-100 animate-fadeIn">
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Dicas Práticas:</p>
+                        <ul class="space-y-2.5">
+                            ${pillar.tips.map(tip => `
+                                <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                    <i data-lucide="check" class="w-4 h-4 ${pillar.colorText} shrink-0 mt-0.5"></i>
+                                    <span>${tip}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                // Evento de clique para expandir/recolher o card
+                card.addEventListener('click', () => {
+                    const drawer = card.querySelector('.tips-drawer');
+                    const indicator = card.querySelector('.toggle-indicator');
+                    const icon = indicator.querySelector('svg');
+                    const label = indicator.querySelector('span');
+                    
+                    const isHidden = drawer.classList.contains('hidden');
+                    if (isHidden) {
+                        drawer.classList.remove('hidden');
+                        label.textContent = 'Ocultar';
+                        indicator.classList.replace('bg-slate-100', 'bg-emerald-100');
+                        indicator.classList.replace('text-slate-600', 'text-emerald-800');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        drawer.classList.add('hidden');
+                        label.textContent = 'Ver dicas';
+                        indicator.classList.replace('bg-emerald-100', 'bg-slate-100');
+                        indicator.classList.replace('text-emerald-800', 'text-slate-600');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                pillarsGrid.appendChild(card);
+            });
+
+            // ==========================================
+            // 2. TERMÔMETRO DE QUALIDADE DE VIDA (QUIZ)
+            // ==========================================
+            const inputSleep = document.getElementById('input-sleep');
+            const labelSleep = document.getElementById('label-sleep');
+            const inputWater = document.getElementById('input-water');
+            const labelWater = document.getElementById('label-water');
+            
+            let activityPoints = 25; // Valor inicial (3 a 4 dias)
+            let breaksPoints = 15;   // Valor inicial (Algumas pausas)
+
+            // Botões de Atividade Física
+            document.querySelectorAll('.habit-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.habit-btn').forEach(b => {
+                        b.className = 'habit-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center';
+                    });
+                    btn.className = 'habit-btn active-habit p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-sm font-semibold text-emerald-800 transition-all text-center';
+                    activityPoints = parseInt(btn.dataset.points, 10);
+                    calculateThermometer();
+                });
+            });
+
+            // Botões de Pausas Mentais
+            document.querySelectorAll('.break-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.break-btn').forEach(b => {
+                        b.className = 'break-btn p-3 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-600 hover:border-emerald-400 transition-all text-center';
+                    });
+                    btn.className = 'break-btn active-break p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-sm font-semibold text-emerald-800 transition-all text-center';
+                    breaksPoints = parseInt(btn.dataset.points, 10);
+                    calculateThermometer();
+                });
+            });
+
+            inputSleep.addEventListener('input', calculateThermometer);
+            inputWater.addEventListener('input', calculateThermometer);
+
+            function calculateThermometer() {
+                const sleepHours = parseFloat(inputSleep.value);
+                const waterCups = parseInt(inputWater.value, 10);
+
+                // Atualiza labels visuais
+                labelSleep.textContent = `${sleepHours} ${sleepHours === 1 ? 'hora' : 'horas'}`;
+                const liters = (waterCups * 0.25).toFixed(2).replace('.00', '');
+                labelWater.textContent = `${waterCups} ${waterCups === 1 ? 'copo' : 'copos'} (${liters}L)`;
+
+                // Cálculo de pontos (máximo 25 por categoria = 100 pontos)
+                let sleepPoints = 0;
+                if (sleepHours >= 7 && sleepHours <= 9) {
+                    sleepPoints = 25;
+                } else if (sleepHours === 6 || sleepHours === 6.5 || sleepHours === 9.5 || sleepHours === 10) {
+                    sleepPoints = 18;
+                } else {
+                    sleepPoints = 8;
+                }
+
+                let waterPoints = Math.min(25, Math.round((waterCups / 8) * 25));
+
+                const totalScore = Math.min(100, sleepPoints + waterPoints + activityPoints + breaksPoints);
+
+                // Atualiza DOM da Pontuação e Barra
+                document.getElementById('score-value').textContent = totalScore;
+                document.getElementById('percentage-text').textContent = `${totalScore}%`;
+                
+                const bar = document.getElementById('thermometer-bar');
+                const badge = document.getElementById('status-badge');
+                const fbTitle = document.getElementById('feedback-title');
+                const fbDesc = document.getElementById('feedback-desc');
+                
+                bar.style.width = `${totalScore}%`;
+
+                // Classificação e Feedback dinâmico
+                if (totalScore >= 85) {
+                    badge.textContent = 'Excelente Vitalidade';
+                    badge.className = 'px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800';
+                    bar.className = 'h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500';
+                    fbTitle.textContent = 'Parabéns! Sua rotina é inspiradora.';
+                    fbDesc.textContent = 'Você mantém um equilíbrio sólido entre descanso, hidratação, movimento e saúde mental. Continue preservando esses hábitos!';
+                } else if (totalScore >= 60) {
+                    badge.textContent = 'Bom Equilíbrio';
+                    badge.className = 'px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800';
+                    bar.className = 'h-full rounded-full bg-gradient-to-r from-sky-400 to-emerald-500 transition-all duration-500';
+                    fbTitle.textContent = 'Você está no caminho certo!';
+                    fbDesc.textContent = 'Seus hábitos mostram uma boa base de autocuidado, mas pequenos ajustes podem elevar ainda mais sua disposição diária.';
+                } else if (totalScore >= 40) {
+                    badge.textContent = 'Atenção Moderada';
+                    badge.className = 'px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800';
+                    bar.className = 'h-full rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 transition-all duration-500';
+                    fbTitle.textContent = 'Sinal amarelo para o seu bem-estar.';
+                    fbDesc.textContent = 'A rotina corrida pode estar consumindo sua energia. Escolha um ou dois hábitos abaixo para melhorar ainda esta semana.';
+                } else {
+                    badge.textContent = 'Alerta de Sobrecarga';
+                    badge.className = 'px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800';
+                    bar.className = 'h-full rounded-full bg-gradient-to-r from-rose-500 to-amber-500 transition-all duration-500';
+                    fbTitle.textContent = 'Hora de desacelerar e cuidar de você!';
+                    fbDesc.textContent = 'Seu corpo e mente estão pedindo mais descanso e atenção. Comece com metas pequenas, como beber mais água e dormir 30 minutos mais cedo.';
+                }
+
+                // Gera lista de sugestões específicas com base nos pontos fracos
+                const suggestions = [];
+                if (sleepHours < 7) {
+                    suggestions.push('Tente deitar 30 a 45 minutos mais cedo hoje para alcançar pelo menos 7h de sono.');
+                } else if (sleepHours > 9.5) {
+                    suggestions.push('Dormir em excesso pode causar letargia; tente manter uma rotina regular de 7h a 9h.');
+                }
+
+                if (waterCups < 8) {
+                    const faltam = 8 - waterCups;
+                    suggestions.push(`Beba mais ${faltam} ${faltam === 1 ? 'copo' : 'copos'} de água por dia para atingir a meta ideal de 2 litros.`);
+                }
+
+                if (activityPoints < 25) {
+                    suggestions.push('Inclua caminhadas leves ou alongamentos de 20 minutos para movimentar o corpo mais vezes na semana.');
+                }
+
+                if (breaksPoints < 25) {
+                    suggestions.push('Adote a regra 50/10: a cada 50 minutos focado, descanse 10 minutos longe de telas.');
+                }
+
+                if (suggestions.length === 0) {
+                    suggestions.push('Mantenha a consistência! Que tal experimentar o Desafio Diário abaixo para variar sua rotina?');
+                }
+
+                const suggestionsList = document.getElementById('suggestions-list');
+                suggestionsList.innerHTML = suggestions.map(item => `
+                    <li class="flex items-start gap-2.5 bg-white/80 p-3 rounded-xl border border-slate-200/60">
+                        <i data-lucide="arrow-right-circle" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                        <span>${item}</span>
+                    </li>
+                `).join('');
+                
+                lucide.createIcons();
+            }
+
+            // ==========================================
+            // 3. GERADOR DE DESAFIO DIÁRIO DE BEM-ESTAR
+            // ==========================================
+            const challenges = [
+                {
+                    category: 'Saúde Mental',
+                    title: 'Respiração Consciente 4-7-8',
+                    desc: 'Faça uma pausa de 2 minutos agora: inspire pelo nariz por 4 segundos, segure o ar por 7 segundos e expire lentamente pela boca por 8 segundos. Repita 3 vezes.'
+                },
+                {
+                    category: 'Saúde Física',
+                    title: 'Alongamento Despertar da Coluna',
+                    desc: 'Levante-se da cadeira, entrelace os dedos acima da cabeça, estique bem os braços por 15 segundos e faça 5 rotações suaves com os ombros para trás.'
+                },
+                {
+                    category: 'Relacionamentos',
+                    title: 'Conexão Genuína sem Pressa',
+                    desc: 'Envie um áudio ou mensagem carinhosa para alguém importante na sua vida dizendo o quanto você admira ou sente falta dessa pessoa.'
+                },
+                {
+                    category: 'Alimentação',
+                    title: 'Refeição Livre de Telas',
+                    desc: 'Na sua próxima refeição, deixe o celular em outro cômodo e desligue a TV. Saboreie cada garfada com atenção plena aos aromas e texturas.'
+                },
+                {
+                    category: 'Sono Reparador',
+                    title: 'Pôr do Sol Digital',
+                    desc: 'Hoje à noite, desligue telas brilhantes (celular, computador e TV) pelo menos 45 minutos antes de dormir e leia um livro ou ouça música calma.'
+                },
+                {
+                    category: 'Saúde Mental',
+                    title: 'Diário de 3 Gratidões',
+                    desc: 'Anote em um papel ou bloco de notas 3 coisas simples pelas quais você é grato hoje — pode ser um café quente, um elogio ou um dia ensolarado.'
+                },
+                {
+                    category: 'Saúde Física',
+                    title: 'Banho de Sol Matinal',
+                    desc: 'Exponha-se à luz natural do sol por 10 a 15 minutos hoje para estimular a produção de vitamina D e regular seu relógio biológico.'
+                }
+            ];
+
+            let currentChallengeIndex = 0;
+            const btnNewChallenge = document.getElementById('btn-new-challenge');
+            const btnCompleteChallenge = document.getElementById('btn-complete-challenge');
+            const challengeCategory = document.getElementById('challenge-category');
+            const challengeTitle = document.getElementById('challenge-title');
+            const challengeDesc = document.getElementById('challenge-desc');
+
+            btnNewChallenge.addEventListener('click', () => {
+                let nextIndex;
+                do {
+                    nextIndex = Math.floor(Math.random() * challenges.length);
+                } while (nextIndex === currentChallengeIndex && challenges.length > 1);
+                
+                currentChallengeIndex = nextIndex;
+                const selected = challenges[currentChallengeIndex];
+
+                // Efeito suave de transição
+                challengeTitle.style.opacity = '0';
+                challengeDesc.style.opacity = '0';
+
+                setTimeout(() => {
+                    challengeCategory.textContent = selected.category;
+                    challengeTitle.textContent = selected.title;
+                    challengeDesc.textContent = selected.desc;
+                    challengeTitle.style.opacity = '1';
+                    challengeDesc.style.opacity = '1';
+                }, 180);
+            });
+
+            btnCompleteChallenge.addEventListener('click', () => {
+                showToast('Parabéns! Desafio concluído. Seu bem-estar agradece!');
+            });
+
+            // ==========================================
+            // 4. CONTADOR INTERATIVO DE HIDRATAÇÃO
+            // ==========================================
+            const totalGoalCups = 8;
+            let currentCups = 0;
+
+            const waterGrid = document.getElementById('water-cups-grid');
+            const waterCountDisplay = document.getElementById('water-count-display');
+            const waterMlDisplay = document.getElementById('water-ml-display');
+            const waterMotivation = document.getElementById('water-motivation');
+            const btnAddWater = document.getElementById('btn-add-water');
+            const btnResetWater = document.getElementById('btn-reset-water');
+
+            function renderWaterCups() {
+                waterGrid.innerHTML = '';
+                for (let i = 1; i <= totalGoalCups; i++) {
+                    const isFilled = i <= currentCups;
+                    const cupBtn = document.createElement('button');
+                    cupBtn.type = 'button';
+                    cupBtn.title = `Marcar ${i} ${i === 1 ? 'copo' : 'copos'}`;
+                    cupBtn.className = `h-14 rounded-2xl border-2 flex flex-col items-center justify-center transition-all duration-300 active:scale-90 ${
+                        isFilled 
+                        ? 'bg-sky-500 border-sky-500 text-white shadow-sm' 
+                        : 'bg-slate-50 border-slate-200 text-slate-400 hover:border-sky-300 hover:text-sky-500'
+                    }`;
+                    
+                    cupBtn.innerHTML = `
+                        <i data-lucide="cup-soda" class="w-5 h-5 ${isFilled ? 'fill-white/20' : ''}"></i>
+                        <span class="text-[10px] font-bold mt-0.5">${i * 250}ml</span>
+                    `;
+
+                    cupBtn.addEventListener('click', () => {
+                        // Permite clicar diretamente em um copo para definir a quantidade
+                        if (currentCups === i) {
+                            currentCups = i - 1;
+                        } else {
+                            currentCups = i;
+                        }
+                        updateWaterUI();
+                    });
+
+                    waterGrid.appendChild(cupBtn);
+                }
+                lucide.createIcons();
+            }
+
+            function updateWaterUI() {
+                waterCountDisplay.textContent = currentCups;
+                waterMlDisplay.textContent = `${currentCups * 250} ml`;
+
+                if (currentCups === 0) {
+                    waterMotivation.textContent = 'Comece o dia bebendo um copo de água para despertar o metabolismo!';
+                } else if (currentCups < 4) {
+                    waterMotivation.textContent = 'Bom começo! Continue hidratando seu corpo ao longo da manhã.';
+                } else if (currentCups < 8) {
+                    waterMotivation.textContent = 'Você já passou da metade da meta! Sua concentração agradece.';
+                } else {
+                    waterMotivation.textContent = 'Meta diária de 2 litros atingida! Excelente hidratação hoje.';
+                }
+
+                // Sincroniza também com o slider do Termômetro para facilitar a experiência
+                inputWater.value = Math.min(12, Math.max(1, currentCups || 1));
+                calculateThermometer();
+                renderWaterCups();
+            }
+
+            btnAddWater.addEventListener('click', () => {
+                if (currentCups < totalGoalCups) {
+                    currentCups++;
+                    updateWaterUI();
+                    if (currentCups === totalGoalCups) {
+                        showToast('Incrível! Você atingiu sua meta de 8 copos de água hoje!');
+                    }
+                } else {
+                    showToast('Você já completou os 8 copos da meta diária!');
+                }
+            });
+
+            btnResetWater.addEventListener('click', () => {
+                currentCups = 0;
+                updateWaterUI();
+                showToast('Contador de hidratação zerado.');
+            });
+
+            // Inicializa os estados iniciais na tela
+            renderWaterCups();
+            calculateThermometer();
+        });
+    </script>
+</body>
+</html>
